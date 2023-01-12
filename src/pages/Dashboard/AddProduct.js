@@ -1,25 +1,23 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../redux/actions/productAction";
+import { addProductData } from "../../redux/thunks/products/addProductData";
 
 const AddProduct = () => {
   const { register, handleSubmit } = useForm();
-
+  const dispatch = useDispatch();
   const submit = (data) => {
     const product = {
       model: data.model,
       brand: data.brand,
       status: data.status === "true" ? true : false,
       price: data.price,
-      keyFeature: [
-        data.keyFeature1,
-        data.keyFeature2,
-        data.keyFeature3,
-        data.keyFeature4,
-      ],
+      keyFeature: [data.keyFeature1, data.keyFeature2, data.keyFeature3, data.keyFeature4],
       spec: [],
     };
 
-    console.log(product);
+    dispatch(addProductData(product));
   };
 
   return (
@@ -61,24 +59,13 @@ const AddProduct = () => {
           <h1 className='mb-3'>Availability</h1>
           <div className='flex gap-3'>
             <div>
-              <input
-                type='radio'
-                id='available'
-                value={true}
-                {...register("status")}
-              />
+              <input type='radio' id='available' value={true} {...register("status")} />
               <label className='ml-2 text-lg' htmlFor='available'>
                 Available
               </label>
             </div>
             <div>
-              <input
-                type='radio'
-                id='stockOut'
-                name='status'
-                value={false}
-                {...register("status")}
-              />
+              <input type='radio' id='stockOut' name='status' value={false} {...register("status")} />
               <label className='ml-2 text-lg' htmlFor='stockOut'>
                 Stock out
               </label>
@@ -90,45 +77,25 @@ const AddProduct = () => {
           <label className='mb-2' htmlFor='keyFeature1'>
             Key Feature 1
           </label>
-          <input
-            type='text'
-            name='keyFeature1'
-            id='keyFeature1'
-            {...register("keyFeature1")}
-          />
+          <input type='text' name='keyFeature1' id='keyFeature1' {...register("keyFeature1")} />
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2' htmlFor='keyFeature2'>
             Key Feature 2
           </label>
-          <input
-            type='text'
-            name='keyFeature2'
-            id='keyFeature2'
-            {...register("keyFeature2")}
-          />
+          <input type='text' name='keyFeature2' id='keyFeature2' {...register("keyFeature2")} />
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2' htmlFor='keyFeature3'>
             Key Feature 3
           </label>
-          <input
-            type='text'
-            name='keyFeature3'
-            id='keyFeature3'
-            {...register("keyFeature3")}
-          />
+          <input type='text' name='keyFeature3' id='keyFeature3' {...register("keyFeature3")} />
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2' htmlFor='keyFeature4'>
             Key Feature 4
           </label>
-          <input
-            type='text'
-            name='keyFeature4'
-            id='keyFeature4'
-            {...register("keyFeature4")}
-          />
+          <input type='text' name='keyFeature4' id='keyFeature4' {...register("keyFeature4")} />
         </div>
 
         <div className='flex justify-between items-center w-full'>
